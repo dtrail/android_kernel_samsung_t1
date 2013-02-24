@@ -69,3 +69,5 @@ obj-$(CONFIG_GCBV)     += gcx/gcbv/
 obj-$(CONFIG_GCIOCTL)      += gcx/gcioctl/
 obj-$(CONFIG_GC_CORE)      += gcx/gccore/
 obj-$(CONFIG_CACHE2DMANAGER)   += cache-2dmanager/
+obj-$(CONFIG_FSYNC_CONTROL)  += fsync_control.o
+
