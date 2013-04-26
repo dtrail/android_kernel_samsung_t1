@@ -122,6 +122,30 @@ config CPU_FREQ_DEFAULT_GOV_HOTPLUG
 	  support the hotplug governor. If unsure have a look at
 	  the help section of the driver. Fallback governor will be the
 	  performance governor.
+
+config CPU_FREQ_DEFAULT_GOV_SMARTASS2
+	bool "smartass2"
+	select CPU_FREQ_GOV_SMARTASS2
+	help
+	  Use the CPUFreq governor 'smartassV2' as default.
+
+config CPU_FREQ_DEFAULT_GOV_PEGASUSQ
+	bool "pegasusq"
+	select CPU_FREQ_GOV_PEGASUSQ
+
+config CPU_FREQ_DEFAULT_GOV_LULZACTIVE
+	bool "lulzactive"
+	select CPU_FREQ_GOV_LULZACTIVE
+	select CPU_FREQ_GOV_PERFORMANCE
+	help
+	  Use the CPUFreq governor 'lulzactive' as default.
+
+config CPU_FREQ_DEFAULT_GOV_HYPER
+        bool "HYPER"
+        select CPU_FREQ_GOV_HYPER
+        help
+          Use the CPUFreq governor 'HYPER' as default.
+
 endchoice
 
 config CPU_FREQ_GOV_PERFORMANCE
@@ -218,6 +242,32 @@ config CPU_FREQ_GOV_CONSERVATIVE
 	  For details, take a look at linux/Documentation/cpu-freq.
 
 	  If in doubt, say N.
+
+config CPU_FREQ_GOV_LULZACTIVE
+	tristate "'lulzactive' cpufreq governor"
+	depends on CPU_FREQ
+	help
+	  'lulzactive' - a new interactive governor by Tegrak!
+
+	  If in doubt, say N.
+
+config CPU_FREQ_GOV_PEGASUSQ
+	tristate "'pegasusq' cpufreq policy governor"
+
+config CPU_FREQ_GOV_SMARTASS2
+	tristate "'smartassV2' cpufreq governor"
+	depends on CPU_FREQ
+	help
+	  'smartassV2' - a "smart" governor
+	  If in doubt, say N.
+
+config CPU_FREQ_GOV_HYPER
+        tristate "'HYPER' cpufreq governor"
+        depends on CPU_FREQ
+        help
+          'HYPER' - a tweaked "ondemand" based smart and smooth optimized governor!
+
+           If in doubt, say Y.
 
 menu "x86 CPU frequency scaling drivers"
 depends on X86
