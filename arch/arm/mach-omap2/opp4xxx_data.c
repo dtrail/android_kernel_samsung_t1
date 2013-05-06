@@ -103,6 +103,7 @@ struct omap4_ldo_abb_trim_data {
 #define OMAP4430_VDD_MPU_OPP150_UV		1100000
 #define OMAP4430_VDD_MPU_OPPTURBO_UV		1175000
 #define OMAP4430_VDD_MPU_OPPNITRO_UV		1250000
+#define OMAP4430_VDD_MPU_OPPNITRO2_UV		1300000
 #define OMAP4430_VDD_MPU_OPPNITROSB_UV		1350000
 
 struct omap_volt_data omap443x_vdd_mpu_volt_data[] = {
@@ -131,6 +132,9 @@ struct omap_volt_data omap443x_vdd_mpu_volt_data[] = {
 			OMAP44XX_CONTROL_FUSE_MPU_OPPTURBO,
 			0xfa, 0x23, OMAP_ABB_FAST_OPP),
 	VOLT_DATA_DEFINE(OMAP4430_VDD_MPU_OPPNITRO_UV, 0,
+			OMAP44XX_CONTROL_FUSE_MPU_OPPNITRO,
+			0xfa, 0x27, OMAP_ABB_FAST_OPP),
+	VOLT_DATA_DEFINE(OMAP4430_VDD_MPU_OPPNITRO2_UV, 0,
 			OMAP44XX_CONTROL_FUSE_MPU_OPPNITRO,
 			0xfa, 0x27, OMAP_ABB_FAST_OPP),
 	VOLT_DATA_DEFINE(OMAP4430_VDD_MPU_OPPNITROSB_UV, 0,
@@ -199,6 +203,8 @@ static struct omap_vdd_dep_volt omap443x_vdd_mpu_core_dep_data[] = {
 			.dep_vdd_volt = OMAP4430_VDD_CORE_OPP100_UV},
 	{.main_vdd_volt = OMAP4430_VDD_MPU_OPPNITRO_UV,
 			.dep_vdd_volt = OMAP4430_VDD_CORE_OPP100_UV},
+	{.main_vdd_volt = OMAP4430_VDD_MPU_OPPNITRO2_UV,
+			.dep_vdd_volt = OMAP4430_VDD_CORE_OPP100_UV},
 	{.main_vdd_volt = OMAP4430_VDD_MPU_OPPNITROSB_UV,
 			.dep_vdd_volt = OMAP4430_VDD_CORE_OPP100_UV},
 };
@@ -234,7 +240,7 @@ struct omap_vdd_dep_info omap443x_vddiva_dep_info[] = {
 static struct omap_opp_def __initdata omap443x_opp_def_list[] = {
 	/* MPU OPP-100 - OPP10 */
 	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true,
-			100000000, OMAP4430_VDD_MPU_OPP50_UV),
+			150000000, OMAP4430_VDD_MPU_OPP50_UV),
 	/* MPU OPP-200 - OPP25 */
 	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true,
 			200000000, OMAP4430_VDD_MPU_OPP50_UV),
@@ -256,10 +262,13 @@ static struct omap_opp_def __initdata omap443x_opp_def_list[] = {
 	/* MPU OPP-800 - OPP-Turbo */
 	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true,
 			800000000, OMAP4430_VDD_MPU_OPPTURBO_UV),
-	/* MPU OPP-900 - OPP-SB */
+	/* MPU OPP-900 - OPP-NT */
+	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true,
+			1100000000, OMAP4430_VDD_MPU_OPPNITRO_UV),
+	/* MPU OPP-1000 - OPP-NT2 */
 	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", true,
 			1008000000, OMAP4430_VDD_MPU_OPPNITRO_UV),
-	/* MPU OPP-1000 - OPP-NITROSB */
+	/* MPU OPP-1100 - OPP-NITROSB */
 	OPP_INITIALIZER("mpu", "dpll_mpu_ck", "mpu", false,
 			1200000000, OMAP4430_VDD_MPU_OPPNITROSB_UV),
 	/* L3 OPP1 - OPP50 */
